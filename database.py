@@ -1,25 +1,53 @@
-"""
-this file is adding the link to the database 
-"""
+import secrets
+import os
+import dotenv
 from supabase import create_client, Client
+import sys 
 
-# Supabase URL and Key (do not expose these in production environments)
-url = 'https://hrdeupsgkornnuyhawtd.supabase.co'  # e.g., 'https://xyzcompany.supabase.co'
-key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhyZGV1cHNna29ybm51eWhhd3RkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1NDM5MTQsImV4cCI6MjAzMTExOTkxNH0.FpkvS21XQkBsAgGd8TcbWPRDJvQylOYuo7voKhzJpwQ'  # your anon or service key
+dotenv.load_dotenv()
 
-# Create a Supabase client
-supabase: Client = create_client(url, key)
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-def add_link(link_url):
-    #okay now i can add links to the db, every link in the database will add people to the repo
-    response = supabase.table('links').insert({"link": link_url}).execute()
-    print("response",response)
-    #response = supabase.table('links').insert(data).execute()
-    #if response.status_code == 201:
-    #    print("Link added successfully!")
-    #else:
-    #    print("Failed to add link:", response.status_code, response.text)
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# Example of adding a link
-add_link('https://example.com')
+def main():
+    """
+    Main function to generate a unique repository link and add it to the database with the owner's name.
+    
+    Usage:
+        python database.py <repository_name> <repository_owner>
+    
+    Args:
+        repository_name (str): The name of the repository for which to generate the link.
+        repository_owner (str): The GitHub username of the repository owner.
+    
+    Returns:
+        str: The generated URL if the database operation is successful; otherwise, it returns an error message.
+    """
+    repo_name = sys.argv[1]
+    repo_owner = sys.argv[2]
+    url = generate_repo_link(repo_name)
+    add_url_and_owner_name_to_database(url, repo_owner)
+    return url
+    
+def generate_repo_link(repo_name):
+    unique_id = secrets.token_urlsafe(44)
+    full_path = f"http://localhost:8000/{unique_id}/{repo_name}"
+    return full_path
 
+def add_url_and_owner_name_to_database(url, repo_owner):
+    try:
+        response = supabase.table('links').insert({
+            "link": url,
+            "owner": repo_owner
+        }).execute()
+        if response.status_code == 201:
+            return {"status": "success", "data": response.data}
+        else:
+            return {"status": "error", "message": "Failed to insert data into the database"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+if __name__ == "__main__":
+    main()
