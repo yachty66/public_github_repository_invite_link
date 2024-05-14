@@ -33,6 +33,7 @@ def main():
     
 def generate_repo_link(repo_name):
     unique_id = secrets.token_urlsafe(44)
+    #todo add the whole correct link here
     full_path = f"{unique_id}/{repo_name}"
     return full_path
 
@@ -50,4 +51,5 @@ def add_url_and_owner_name_to_database(url, repo_owner):
         return {"status": "error", "message": str(e)}
 
 if __name__ == "__main__":
-    main()
+    link=main()
+    print(link)
