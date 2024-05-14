@@ -33,7 +33,7 @@ def main():
     
 def generate_repo_link(repo_name):
     unique_id = secrets.token_urlsafe(44)
-    full_path = f"http://localhost:8000/{unique_id}/{repo_name}"
+    full_path = f"{unique_id}/{repo_name}"
     return full_path
 
 def add_url_and_owner_name_to_database(url, repo_owner):

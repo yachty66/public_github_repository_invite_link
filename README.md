@@ -30,10 +30,11 @@ if i am not getting it working i will just do a simple input form where people c
 4. now this url can be called as subdomain and is than getting the username of the user via auth and adds them to the repo
 5. user is redirected to callback page 
 
-
 ## steps
 
 - [ ] make the routing to different subdomains locally working for me 
 - [ ] deploy this to amazon lambda
 - [ ] clean the code
 - [ ] release on twitter
+
+now since this is added i can tackle the next step
