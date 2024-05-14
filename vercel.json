@@ -1,0 +1,6 @@
+{
+  "redirects": [{
+      "source": "/api/(.*)",
+      "destination": "api/index.py"
+  }]
+}

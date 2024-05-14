@@ -32,9 +32,14 @@ if i am not getting it working i will just do a simple input form where people c
 
 ## steps
 
-- [ ] make the routing to different subdomains locally working for me 
-- [ ] deploy this to amazon lambda
+- [x] add to the callback page a log string which does make sense
+- [x] make the database file return and actual url
+- [x] make sure that only the urls work which are also inside the database
+    - http://127.0.0.1:8080/5MrpgmEcgqtawmONK7xGIklDMAMXEtqw_PKieghuoU4JorrEX7gYKd-BGss/public_github_repository_invite_link
+- [ ] make the whole thing serverless working
+- [ ] instead of throwing internal server error, throw appropriate exception
 - [ ] clean the code
-- [ ] release on twitter
+- [ ] post on twitter 
 
-now since this is added i can tackle the next step
+
+https://dev.to/abdadeel/deploying-fastapi-app-on-vercel-serverless-18b1

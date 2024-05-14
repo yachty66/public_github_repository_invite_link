@@ -29,6 +29,7 @@ def main():
     repo_owner = sys.argv[2]
     url = generate_repo_link(repo_name)
     add_url_and_owner_name_to_database(url, repo_owner)
+    url = f"http://127.0.0.1:8080/{url}"
     return url
     
 def generate_repo_link(repo_name):
