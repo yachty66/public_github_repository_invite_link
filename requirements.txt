@@ -1,5 +1,1 @@
-fastapi==0.111.0
-httpx==0.27.0
 sanic==19.6.0
-python-dotenv==1.0.1
-supabase==2.4.5

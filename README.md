@@ -37,6 +37,9 @@ if i am not getting it working i will just do a simple input form where people c
 - [x] make sure that only the urls work which are also inside the database
     - http://127.0.0.1:8080/5MrpgmEcgqtawmONK7xGIklDMAMXEtqw_PKieghuoU4JorrEX7gYKd-BGss/public_github_repository_invite_link
 - [ ] make the whole thing serverless working
+    - [ ] make a simple route to "hello" to check if the sanic framework is working
+    - [ ] make a route to a link from the database to make sure its working (https://public-github-repository-invite-link-6fc1dttzx.vercel.app/dajqj9lsc9kfUAZS9cKs83bdKAoPv5_Ldg3xWPJlhoem10sAkdfiYgKqFE8/test_test)
+    - [ ] change url in database.py to vercel domain
 - [ ] instead of throwing internal server error, throw appropriate exception
 - [ ] clean the code
 - [ ] post on twitter 
