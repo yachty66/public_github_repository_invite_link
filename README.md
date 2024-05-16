@@ -1,48 +1,71 @@
-# public_github_repository_invite_link
+# Public GitHub Repository Invite Link
 
-scenario: i have the repo https://github.com/yachty66/test_repo and want to add the github user Asynchron44 to the repo via an invite link
+GitHub currently lacks the feature to create a public link that allows others to collaborate on a repository. The only way to add collaborators to a GitHub repository is to do this manually. This repository solves this problem by generating a link from your repository through which others can be added as collaborators.
 
-approach:
+## How Does It Work
 
-- run python script with link to repo as argument and python script returns a invite link which redirects to auth page which when extracts the users email and than is adding the user to the github repository 
+This project leverages GitHub's OAuth and API to automate the process of adding collaborators to a repository. When a user clicks on the generated invite link, they are redirected to GitHub to authorize the application. Once authorized, the user is automatically added as a collaborator to the specified repository.
 
-- all invite links are saved in supabase 
+### Workflow
 
-- if an invite link is clicked and user did auth a function is executed which uses github endpoint for adding a the person as an collaborator 
+1. **Generate Invite Link**: An invite link is generated for the repository.
+2. **User Clicks Link**: The user clicks on the invite link and is redirected to GitHub for authorization.
+3. **OAuth Authorization**: The user authorizes the application to access their GitHub account.
+4. **Add Collaborator**: The application uses the GitHub API to add the user as a collaborator to the repository.
 
----
+## How to Set It Up
 
-i cannot make the link public cause nobody is putting his token in a public webform. this fucks me up so hard than i am not able to wrap my head around this. 
+### Prerequisites
 
-what do i want? 
+- GitHub account
+- Supabase account (for storing invite links)
+- Vercel account (for deployment)
 
-how does this part look like where i am trying to get the username of the user from github. 
+### Installation
 
-would be much more simple if the user is just adding his username instead of doing the auth thing. i dont know man. 
+1. **Clone the Repository**
 
-if i am not getting it working i will just do a simple input form where people can input their data in the form. 
+```bash
+git clone https://github.com/yourusername/public_github_repository_invite_link.git
+```
 
-## app workflow
+2. **Set Up Environment Variables**
 
-1. py script is called with name of github repo as argument
-2. script generates url in format www.mydomain/uuid/repo_name
-3. script adds url together with respective github auth url to database
-4. now this url can be called as subdomain and is than getting the username of the user via auth and adds them to the repo
-5. user is redirected to callback page 
+Create a `.env` file in the root directory and add the following environment variables:
 
-## steps
+```env
+CLIENT_ID=your_github_client_id
+CLIENT_SECRET=your_github_client_secret
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_key
+GITHUB_TOKEN=your_github_token
+```
 
-- [x] add to the callback page a log string which does make sense
-- [x] make the database file return and actual url
-- [x] make sure that only the urls work which are also inside the database
-    - http://127.0.0.1:8080/5MrpgmEcgqtawmONK7xGIklDMAMXEtqw_PKieghuoU4JorrEX7gYKd-BGss/public_github_repository_invite_link
-- [ ] make the whole thing serverless working
-    - [ ] make a simple route to "hello" to check if the sanic framework is working
-    - [ ] make a route to a link from the database to make sure its working (https://public-github-repository-invite-link-6fc1dttzx.vercel.app/dajqj9lsc9kfUAZS9cKs83bdKAoPv5_Ldg3xWPJlhoem10sAkdfiYgKqFE8/test_test)
-    - [ ] change url in database.py to vercel domain
-- [ ] instead of throwing internal server error, throw appropriate exception
-- [ ] clean the code
-- [ ] post on twitter 
+### Deployment
 
+1. **Deploy to Vercel**
 
-https://dev.to/abdadeel/deploying-fastapi-app-on-vercel-serverless-18b1
+- Connect your GitHub repository to Vercel.
+- Set the environment variables in the Vercel dashboard.
+- Deploy the application.
+- Take the URL from the Vercel application and set it to the environment variable `VERCEL_URL`.
+
+### Usage
+
+1. **Generate an Invite Link**
+
+Run the `database.py` script with your repository name and your username. For example:
+
+```bash
+python database.py public_github_repository_invite_link yachty66
+```
+
+This will return a link which can be used to invite collaborators.
+
+2. **Share the Link**
+
+Share the generated link with potential collaborators.
+
+3. **Collaborators Click the Link**
+
+When collaborators click the link, they will be redirected to GitHub to authorize the application and will be automatically added to the repository.
