@@ -39,6 +39,7 @@ CLIENT_SECRET=your_github_client_secret
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_key
 GITHUB_TOKEN=your_github_token
+GITHUB_REPOSITORY_OWNER=owner
 ```
 
 3. **Set Up Supabase**
