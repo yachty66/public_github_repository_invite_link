@@ -41,6 +41,15 @@ SUPABASE_KEY=your_supabase_key
 GITHUB_TOKEN=your_github_token
 ```
 
+3. **Set Up Supabase**
+
+- Go to the [Supabase website](https://supabase.io/) and create an account.
+- Create a new project in Supabase.
+- Navigate to the "Table Editor" and create a new table named `links` with the following columns (for an easier but less secure setup, disable Row Level Security (RLS)):
+    - `id` (UUID, primary key)
+    - `link` (text)
+    - `owner` (text)
+
 ### Deployment
 
 1. **Deploy to Vercel**
