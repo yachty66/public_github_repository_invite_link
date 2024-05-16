@@ -1,4 +1,0 @@
-httpx
-sanic
-python-dotenv
-supabase
